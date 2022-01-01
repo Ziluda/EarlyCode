@@ -1,0 +1,45 @@
+# MY CODE (it's longer by 3 lines)
+
+total = 0
+
+if size == "S":
+    total += 15
+    if add_pepperoni == "Y":
+        total += 2
+elif size == "M":
+    total += 20
+    if add_pepperoni == "Y":
+        total += 3
+
+elif size == "L":
+    total += 25
+    if add_pepperoni == "Y":
+        total += 3
+
+else:
+    print("Please enter a valid size.")             
+
+if extra_cheese == "Y":
+    total += 1
+
+print(f"Your final bill is: ${total}")
+
+# MODEL CODE (15 lines)
+
+if size == "S":
+  bill += 15
+elif size == "M":
+  bill += 20
+else:
+  bill += 25
+
+if add_pepperoni == "Y":
+  if size == "S":
+    bill += 2
+  else:
+    bill += 3
+    
+if extra_cheese == "Y":
+  bill += 1
+  
+print(f"Your final bill is: ${bill}.")
