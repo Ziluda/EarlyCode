@@ -44,7 +44,12 @@ while not end_of_game:
         # print(f"Current position: {position}\n Current letter: {letter}\n Guessed letter: {guess}")
         if letter == guess:
             display[position] = letter
-
+    
+    # alternate way to replace the blank with a correct guess is as follows:
+    # for position in range(len(chosen_word)):
+    #     if chosen_word[position] == guess:
+    #         display[position] = guess
+    
     #Check if user is wrong.
 
     if guess not in chosen_word:
