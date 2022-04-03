@@ -28,7 +28,7 @@ display = []
 for _ in range(word_length):
     display += "_"
 
-while not end_of_game:
+while not end_of_game: #you could also create a variable end_game = word_length, and then in the while condition state end_game > 0, then at the end of the loop subtract one from end_game
     guess = input("Guess a letter: ").lower()
 
     clear()
