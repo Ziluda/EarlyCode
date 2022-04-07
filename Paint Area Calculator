@@ -1,0 +1,59 @@
+# MY CODE & MODEL CODE (plus my import statement is much more efficient)
+
+#Write your code below this line 👇
+
+from math import ceil
+
+def paint_calc(height, width, cover):
+    paintc = ceil((height*width) / cover)
+    print(f"You'll need {paintc} can(s) of paint")
+
+
+# the code below works too, I only reduced a step above
+
+# import math
+
+# def paint_calc(height, width, cover):
+#     decimal_cans = (height*width)/cover
+#     final = (math.ceil(decimal_cans))
+#     print(f"You'll need {final} cans of paint.")
+
+
+#Write your code above this line 👆
+# Define a function called paint_calc() so that the code below works.   
+
+# 🚨 Don't change the code below 👇
+test_h = int(input("Height of wall: "))
+test_w = int(input("Width of wall: "))
+coverage = 5
+paint_calc(height=test_h, width=test_w, cover=coverage)
+
+# Also, below are some notes for the ceil() and round() functions to understand their functionalities better
+
+USER:
+  print(math.ceil(5.0) == round(5.0 + 0.5))
+  False
+
+  print(math.ceil(4.0) == round(4.0 + 0.5))
+  True
+  
+  The issue is that python rounds x.5 either up or down depending on whether x is odd or even.
+  
+USER:
+  Because as far as what I have always been reading about round() was, if x.5 will always round up, if x.<5 will always round down.
+
+USER:
+  The reason is statistics. Let's say you have a large database of a million results which you need to round. If the round() function always rounded up, then you would get a statistical bias in your results. By rounding up on odds and down on evens, any bias is likely to be removed, so your result is more likely to be closer to the truth.
+  
+USER:
+  I had to look up the reason for this and this is what I found :
+
+  "Note: The behavior of round() for floats can be surprising. Notice round(2.675, 2) gives 2.67 instead of the expected 2.68. This is not a bug: it's a result of the fact that most decimal fractions can't be represented exactly as a float.
+
+  When the decimal 2.675 is converted to a binary floating-point number, it's again replaced with a binary approximation, whose exact value is:
+
+  2.67499999999999982236431605997495353221893310546875
+
+  Due to this, it is rounded down to 2.67."
+
+
