@@ -15,14 +15,6 @@ def prime_checker(number):
 n = int(input("Check this number: "))
 prime_checker(number=n)
 
-# MY SECOND SUCCESSFULLY ATTEMPTED CODE (WITH I THINK IS EVEN BETTER IN TERMS OF EFFICIENCY)
-
-def prime_checker(number):
-    if ((number % 2 != 0) and (number % 3 != 0)) and ((number % 5 != 0) and (number % 7 != 0)):
-        print("It's a prime number.")
-    else:
-        print("It's not a prime number.")
-
 
 # MODEL CODE
 
@@ -42,3 +34,25 @@ def prime_checker(number):
 #Do NOT change any of the code below👇
 n = int(input("Check this number: "))
 prime_checker(number=n)
+
+
+# LEARN HOW TO FIX THIS SO IT WORKS CORRECTLY
+
+
+def prime_checker(number):
+    if (number != 2 and number != 3) and (number != 5 and number != 7):
+        if (number%2 != 0 or number%3 != 0) or (number%5 != 0 or number%7 != 0):
+            print("It's a prime number.")
+        elif (number%2 != 0 and number%3 != 0) and (number%5 != 0 and number%7 != 0):
+            print("It's a prime number.")
+    else:
+        print("It's not a prime number.")
+
+# EVEN THIS
+
+def prime_checker(number):
+    if ((number % 2 != 0) and (number % 3 != 0)) and ((number % 5 != 0) and (number % 7 != 0)):
+        print("It's a prime number.")
+    else:
+        print("It's not a prime number.")
+
