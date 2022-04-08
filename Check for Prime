@@ -19,7 +19,7 @@ prime_checker(number=n)
 # MODEL CODE
 
 def prime_checker(number):
-  is_prime == True
+  is_prime = True
   for n in range(2, number): # you don't need to add a minus one cause the range function doesn't include the upper limit anyway
     if number % n == 0:
       is_prime == False
