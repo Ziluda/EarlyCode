@@ -19,10 +19,7 @@ prime_checker(number=n)
 
 def prime_checker(number):
     if ((number % 2 != 0) and (number % 3 != 0)) and ((number % 5 != 0) and (number % 7 != 0)):
-        if number % 3 != 0:
-            if number % 5 != 0:
-                if number % 7 != 0:
-                    print("It's a prime number.")
+        print("It's a prime number.")
     else:
         print("It's not a prime number.")
 
