@@ -2,9 +2,9 @@ from replit import clear
 
 import random
 
-import hangman_art as art
+import hangman_art as art # or from hangman_art import stages
 
-import hangman_words as words
+import hangman_words as words # or from hangman_words import word_list
 
 print(art.logo)
 
