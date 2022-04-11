@@ -1,0 +1,146 @@
+# A HYBRID BETWEEN ME AND THE MODEL CODE
+
+from art import logo
+
+print(logo)
+
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+def caesar(ctext, cshift, cdirection):
+  end_text = ""
+
+  if cdirection == "decode":
+    cshift *= -1
+  for s in ctext:
+    #TODO-3: What happens if the user enters a number/symbol/space?
+    #Can you fix the code to keep the number/symbol/space when the text is encoded/decoded?
+    #e.g. start_text = "meet me at 3"
+    #end_text = "•••• •• •• 3"
+
+    if s not in alphabet:
+        end_text += s
+    else:
+        position = alphabet.index(s)
+        
+        new_position = (position + cshift) % 26 #TODO-2: What if the user enters a shift that is greater than the number of letters in the alphabet? This is what's most efficient and fool-proof is manipulating the new_position immediately like this
+          
+        end_text += alphabet[new_position]
+    
+  print(f"Here's the {cdirection}d result: {end_text}")
+
+#TODO-1: Import and print the logo from art.py when the program starts.
+
+#TODO-4: Can you figure out a way to ask the user if they want to restart the cipher program?
+#e.g. Type 'yes' if you want to go again. Otherwise type 'no'.
+#If they type 'yes' then ask them for the direction/text/shift again and call the caesar() function again?
+#Hint: Try creating a while loop that continues to execute the program if the user types 'yes'. 
+
+end = False
+
+while end == False:
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
+    
+    caesar(ctext=text, cshift=shift, cdirection=direction)
+
+    dependent = input("Would you like to go again? Type 'yes' or 'no'.\n")
+
+    if dependent == "no":
+        end = True
+        print("Chao")
+
+
+# this file is called art.py but I'm just gonna add it here with the ASCII ART
+
+logo = """           
+ ,adPPYba, ,adPPYYba,  ,adPPYba, ,adPPYba, ,adPPYYba, 8b,dPPYba,  
+a8"     "" ""     `Y8 a8P_____88 I8[    "" ""     `Y8 88P'   "Y8  
+8b         ,adPPPPP88 8PP"""""""  `"Y8ba,  ,adPPPPP88 88          
+"8a,   ,aa 88,    ,88 "8b,   ,aa aa    ]8I 88,    ,88 88          
+ `"Ybbd8"' `"8bbdP"Y8  `"Ybbd8"' `"YbbdP"' `"8bbdP"Y8 88   
+            88             88                                 
+           ""             88                                 
+                          88                                 
+ ,adPPYba, 88 8b,dPPYba,  88,dPPYba,   ,adPPYba, 8b,dPPYba,  
+a8"     "" 88 88P'    "8a 88P'    "8a a8P_____88 88P'   "Y8  
+8b         88 88       d8 88       88 8PP""""""" 88          
+"8a,   ,aa 88 88b,   ,a8" 88       88 "8b,   ,aa 88          
+ `"Ybbd8"' 88 88`YbbdP"'  88       88  `"Ybbd8"' 88          
+              88                                             
+              88           
+"""
+
+
+# PEER EXPLANATIONS AND INSIGHTS THAT ARE WORTH DELVING MORE INTO TO EVOLVE YOUR LOGIC AND PROGRAMMING MINDSET
+
+#USER
+  There can be a lot of situations when you can't change or edit any given data, so it's a better practice from the start apply logic and not rely on a coincidence. My solution is to check if the index is bigger than list length and if it is subtract list length from it.
+
+  def encrypt(plain_text, shift_amount):
+    cipher_text = ""
+    for letter in plain_text:
+      position = alphabet.index(letter)
+      new_position = position + shift_amount
+      if new_position > len(alphabet)-1:
+        new_position = new_position - len(alphabet)
+      cipher_text += alphabet[new_position]
+  
+    print(cipher_text)
+    
+#USER
+  You can also use % to provide a wraparound effect so e.g. if x(index 23) is shifted by four we have an index of 27. 27 % 26 is 1 and index of 1 gives us 'b'
+ 
+  def encrypt(plain_text,shift_amount):
+    encrypted_word = ''
+    for letter in plain_text:
+      i = alphabet.index(letter)
+      encrypted_word += alphabet[(i + shift_amount) % 26] # because, while using modulus (%) if the left figure is less than the right figure, then it immediately returns the left figure
+  
+    print(encrypted_word)
+    
+#USER
+  how if the shift number is greater than 26? For this I has controlled it by while loop
+
+  def encrypt (text,shift):
+
+      length = len(alphabet)
+      result = ''
+      for i in text:
+          pos = alphabet.index(i)
+          pos += shift
+          while pos >= length:
+              pos -= length
+          result += alphabet[pos]
+
+      print(result)
+      
+#USER (if you want a boiled down version of all of the above)
+  def encrypt(text, shift):
+  cipher_text = ""
+  for letter in text:
+    index = (alphabet.index(letter) + shift) % len(alphabet)
+    cipher_text += alphabet[index]
+  print(f"The encoded text is '{cipher_text}'.")
+  
+#USER (or if you prefer an if-conditional)
+  I wrote the if statement to fix the issue with ending the alphabet list,
+
+  ....
+  new_position = position + shift_amount
+
+      if new_position > 26:
+        new_position = new_position - 26
+        new_letter = alphabet[new_position]
+      else:
+        new_letter = alphabet[new_position]
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
