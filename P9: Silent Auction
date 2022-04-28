@@ -1,0 +1,81 @@
+# MY CODE (program written all on my own on the first go. bugs (multiple names or duplicate bids) fixed with some help from course peers in the comments)
+
+from replit import clear
+#HINT: You can call clear() to clear the output in the console.
+
+from art import logo
+
+print(logo)
+
+auction_dict = {}
+
+end = False
+
+while not end:
+    person = input("What is your name?: ").lower()
+
+    # to make sure there are no duplicate keys
+
+    if person in auction_dict:
+        uid = input("This name has already been entered, please enter a unique identifier for your name.\n")
+        person += " (" + uid + ")"
+    
+    bid = int(input("How much would you like to bid?\n$"))
+
+    # assigning a name to the value (bid) of the key (person) in auction_dict
+    
+    auction_dict[person] = bid
+
+    # creating a variable to store a boolean value for the repetition of the loop 
+
+    again = input("Are there any more bidders? Type 'yes' or 'no': ")
+
+    # creating a list of winners even if there is only one, because it makes it easier when we're considering multiple winners and to use the join() function to extract the list items as a string
+    
+    wins = []
+    
+    
+    if again == "yes":
+        clear()
+
+    else:
+        highest = 0 # to create a value that changes on comparison to bid entries, this is an efficient way to create a dynamic variable
+        
+        for name in auction_dict:
+            cbid = auction_dict[name] # cbid means current bid
+            
+            if cbid > highest:
+                highest = cbid
+
+        for name in auction_dict:
+            cbid = auction_dict[name] # we are reassigning the value of cbid because we need the value of cbid to be reevaluated in this second for loop
+            
+            if cbid == highest: # this if statement is precisely meant to add even a solo winner to the list, but it also captures multiple winners if that was the case
+                wins.append(name) # I have now learned that using the append() function is more helpful that concatentation using += operators
+
+
+        if len(wins) > 1: # this is one way to determine which print statement should be executed depending on the number of winners
+            print(f"The winners of the auction are {', '.join(wins)} with a bid of ${highest}.")
+
+        else:
+            print(f"The winner of the silent auction is {wins[0]} with a bid of ${highest}")
+            
+        print(wins, auction_dict)
+  
+        end = True # this value of the "end" variable lives in the else statement because the "if" statement is only meant for continuation of the program for more bidders
+
+
+logo = '''
+                         ___________
+                         \         /
+                          )_______(
+                          |"""""""|_.-._,.---------.,_.-._
+                          |       | | |               | | ''-.
+                          |       |_| |_             _| |_..-'
+                          |_______| '-' `'---------'` '-'
+                          )"""""""(
+                         /_________\\
+                       .-------------.
+                      /_______________\\
+'''
+
