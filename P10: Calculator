@@ -53,7 +53,7 @@ def calculator():
         
         print(f"{num1} {op_symbolX} {numX} = {answer}")
     
-        determines = input(f"Type 'y' to continue calculating with {answer}, 's' to start a new calculation, or 'n' to exit: ")
+        determines = input(f"Type 'y' to continue calculating with {answer}, 's' to start a new calculation: ")
             
         if determines == 'y':
             num1 = answer
