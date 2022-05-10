@@ -41,7 +41,7 @@ def calculator():
     while want_continue == True:
         op_symbolX = input("Pick an operation: ")
     
-        while op_symbolX not in ["+", "-", "*", "/"]:
+        while op_symbolX not in ["+", "-", "*", "/"]: # you could also just write while op_symbol not in operations (the dictionary) because it'll only look at the keys
             print("Please enter a valid operation: ")
             op_symbolX = input("Pick an operation from above: ")
         
