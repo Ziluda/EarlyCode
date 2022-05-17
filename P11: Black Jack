@@ -1,4 +1,4 @@
-# UNFINISHED
+# UNFINISHED (just have to add dual ace functionality)
 
 import random
 
@@ -28,25 +28,46 @@ if choice == 'y':
     dealer_sum = sum(dealer_cards)
     
     ################################################################
-    
-    #1 When player wins
-    def player_wins():
-        print("you're the winner!!!")
-        global end
-        end = True
 
-    #2 When dealer wins or player loses
+    # nothing in it = NII
+    # in it = II
+    
+    #1 When player wins, NII
+    def player_wins():
+        global player_cards
+        global player_sum
+        global dealer_cards
+        global dealer_sum
+        print(f"Your Final Cards: {player_cards}, Your Final Score: {player_sum}")
+        print(f"Dealer's Final Cards: {dealer_cards}, Dealer's Final Score: {dealer_sum}")
+        print("YOU WIN!!!")
+
+    #2 When dealer wins or player loses, II
     def dealer_wins():
-        print("you loser!!! Dealer wins.")
-        global end
-        end = True
-        
-    #3 When player asks for more cards, player_sum < 21
+        global player_cards
+        global player_sum
+        global dealer_cards
+        global dealer_sum
+        print(f"Your Final Cards: {player_cards}, Your Final Score: {player_sum}")
+        print(f"Dealer's Final Cards: {dealer_cards}, Dealer's Final Score: {dealer_sum}")
+        print("YOU LOSE! Dealer wins.")
+
+    #3 When it's a tie, NII
+    def draw():
+        global player_cards
+        global player_sum
+        global dealer_cards
+        global dealer_sum
+        print(f"Your Cards: {player_cards}, Your Score: {player_sum}")
+        print(f"Dealer's Cards: {dealer_cards}, Dealer's Score: {dealer_sum}")
+        print("It's a TIE!!! You don't lose your money hehe.")
+    
+    #4 When player asks for more cards, player_sum < 21, NII
     def player_add():
         global player_cards
         player_cards.append(random.choice(deck))
     
-    #4 When player says they don't want more cards or if player loses
+    #5 When player says they don't want more cards or if player loses, NII
     def dealer_add():
         global dealer_cards
         global dealer_sum
@@ -54,64 +75,74 @@ if choice == 'y':
             dealer_cards.append(random.choice(deck))
             dealer_sum = sum(dealer_cards)
 
-    #5 When you need to check and assess the dealer's score
+    #6 When you need to check and assess the dealer's score, II
     def dealer_assess():
         global dealer_sum
+        global end
         if dealer_sum < 17:
-            while dealer_sum < 17:
-                dealer_add()
+            dealer_add()
         elif dealer_sum == 21:
             dealer_wins()
+            end = True
         elif dealer_sum > 21:
             player_wins()
+            end = True
         elif ((dealer_sum >= 17) and (dealer_sum < 21)):
             deter = compare_cards()
             if deter == "player":
-                print("You WIN!!!")
-                dealer_assess()
-                global end
+                player_wins()
                 end = True
-            else:
-                print("You LOSE! Dealer wins.")
+            elif deter == "dealer":
+                dealer_wins()
+                end = True
 
-    #6 When you want the player to choose either hit 'y' or stand 'n'
+    #7 When you want the player to choose either hit 'y' or stand 'n', II
     def ask_to_add():
         x = input("Hit ('y') or Stand ('n'): ")
         if x == 'y':
             player_add()
-        else:
+        elif x == 'n':
             dealer_add()
             dealer_assess()
                 # global dealer_cards
                 # global dealer_sum
                 # dealer_sum = sum(dealer_cards)
 
-    #7 In the case where you need to compare the scores of the dealer and the player, as to what is closest to 21
+    #8 In the case where you need to compare the scores of the dealer and the player, as to what is closest to 21, II
     def compare_cards():
         in_game = [player_sum, dealer_sum]
-        high = max(in_game)
-        person = in_game.index(high)
-    
-        if person == 0:
-            winner = "player"
-        else:
-            winner = "dealer"
-        
-        return winner
+        if player_sum != 21:
+            if in_game[0] == in_game[1]:
+                draw()
+                global end
+                end = True
+            else:
+                high = max(in_game)
+                person = in_game.index(high)
+                
+                if person == 0:
+                    winner = "player"
+                else:
+                    winner = "dealer"
+                
+                return winner
 
-    #8 When you need to check and assess the player's score
+    #9 When you need to check and assess the player's score, II
     def player_assess():
-        #global player_sum
+        global player_sum
+        global end
         if player_sum > 21:
-            dealer_wins()
             dealer_assess()
+            dealer_wins()
+            end = True
         elif player_sum < 21:
             ask_to_add()
         elif player_sum == 21:
-            player_wins()
             dealer_assess()
-        
-    ################################################################
+            player_wins()
+            end = True
+            
+################################################################
     while not end:        
         dealer_sum = sum(dealer_cards)
         player_sum = sum(player_cards)
@@ -123,4 +154,5 @@ if choice == 'y':
 
 
 # choice = int(input("What number would you like two 11's to represent, a soft 12, or a 2: "))
+
 
