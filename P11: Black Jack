@@ -2,119 +2,125 @@
 
 import random
 
-from art import logo
+logo = """
+.------.            _     _            _    _            _    
+|A_  _ |.          | |   | |          | |  (_)          | |   
+|( \/ ).-----.     | |__ | | __ _  ___| | ___  __ _  ___| | __
+| \  /|K /\  |     | '_ \| |/ _` |/ __| |/ / |/ _` |/ __| |/ /
+|  \/ | /  \ |     | |_) | | (_| | (__|   <| | (_| | (__|   < 
+`-----| \  / |     |_.__/|_|\__,_|\___|_|\_\ |\__,_|\___|_|\_\\
+      |  \/ K|                            _/ |                
+      `------'                           |__/           
+"""
 
 choice = input("Do you want to play BlackJack? 'y' for yes, 'n' for no: ")
 
 deck = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-#1 When player wins first
-def player_wins():
-    print("YOU WIN!!!")
-    print(f"Your Cards: {player_cards}, Your Score: {player_sum}")
-    print(f"Dealer's Cards: {dealer_cards}, Dealer's Score: {dealer_sum}")
-    choice = input("Do you want to play BlackJack? 'y' for yes, 'n' for no: ")
-
 if choice == 'y':
+    end = False
 
-    # INITIALIZATION START
-    
     print(logo)
     player_cards = [random.choice(deck), random.choice(deck)]
     player_sum = sum(player_cards)
     
-    if player_sum == 21:
-        player_wins()
-    
     dealer_cards = [random.choice(deck)]
     dealer_sum = sum(dealer_cards)
     
-    print(f"Your Cards: {player_cards}, Your Score: {player_sum}")
-    print(f"Dealer's Cards: {dealer_cards}, Dealer's Score: {dealer_sum}")
-
-    # INITIALIZATION END
+    ################################################################
     
-    new_card = input("Hit ('y') or Stand ('n'): ")
+    #1 When player wins
+    def player_wins():
+        print("you're the winner!!!")
+        global end
+        end = True
 
-    if new_card == 'y':
-        player_add()
+    #2 When dealer wins or player loses
+    def dealer_wins():
+        print("you loser!!! Dealer wins.")
+        global end
+        end = True
+        
+    #3 When player asks for more cards, player_sum < 21
+    def player_add():
+        global player_cards
+        player_cards.append(random.choice(deck))
+    
+    #4 When player says they don't want more cards or if player loses
+    def dealer_add():
+        global dealer_cards
+        global dealer_sum
+        while dealer_sum < 17:
+            dealer_cards.append(random.choice(deck))
+            dealer_sum = sum(dealer_cards)
+
+    #5 When you need to check and assess the dealer's score
+    def dealer_assess():
+        global dealer_sum
+        if dealer_sum < 17:
+            while dealer_sum < 17:
+                dealer_add()
+        elif dealer_sum == 21:
+            dealer_wins()
+        elif dealer_sum > 21:
+            player_wins()
+        elif ((dealer_sum >= 17) and (dealer_sum < 21)):
+            deter = compare_cards()
+            if deter == "player":
+                print("You WIN!!!")
+                dealer_assess()
+                global end
+                end = True
+            else:
+                print("You LOSE! Dealer wins.")
+
+    #6 When you want the player to choose either hit 'y' or stand 'n'
+    def ask_to_add():
+        x = input("Hit ('y') or Stand ('n'): ")
+        if x == 'y':
+            player_add()
+        else:
+            dealer_add()
+            dealer_assess()
+                # global dealer_cards
+                # global dealer_sum
+                # dealer_sum = sum(dealer_cards)
+
+    #7 In the case where you need to compare the scores of the dealer and the player, as to what is closest to 21
+    def compare_cards():
+        in_game = [player_sum, dealer_sum]
+        high = max(in_game)
+        person = in_game.index(high)
+    
+        if person == 0:
+            winner = "player"
+        else:
+            winner = "dealer"
+        
+        return winner
+
+    #8 When you need to check and assess the player's score
+    def player_assess():
+        #global player_sum
+        if player_sum > 21:
+            dealer_wins()
+            dealer_assess()
+        elif player_sum < 21:
+            ask_to_add()
+        elif player_sum == 21:
+            player_wins()
+            dealer_assess()
+        
+    ################################################################
+    while not end:        
+        dealer_sum = sum(dealer_cards)
+        player_sum = sum(player_cards)
+        
+        print(f"Your Cards: {player_cards}, Your Score: {player_sum}")
+        print(f"Dealer's Cards: {dealer_cards}, Dealer's Score: {dealer_sum}")
+
         player_assess()
 
-    else:
-        dealer_add()
-        dealer_assess()
 
-
-################################################################
-
-#2 When dealer wins first
-def dealer_wins():
-    print("YOU LOSE!!! Dealer wins blah.")
-    print(f"Your Cards: {player_cards}, Your Score: {player_sum}")
-    print(f"Dealer's Cards: {dealer_cards}, Dealer's Score: {dealer_sum}")
-    choice = input("Do you want to play BlackJack? 'y' for yes, 'n' for no: ")
-
-#3 When player asks for more cards, player_sum < 21
-def player_add():
-    player_cards.append(random.choice(deck))
-    player_sum = sum(player_cards)
-
-#4 When player says they don't want more cards or if player loses
-def dealer_add():
-    dealer_cards.append(random.choice(deck))
-    dealer_sum = sum(dealer_hand)
-
-#5 When you need to check and assess the dealer's score
-def dealer_assess():
-    if dealer_sum < 17:
-        dealer_add()
-    elif dealer_sum == 21:
-        dealer_wins()
-    elif dealer_sum > 21:
-        player_wins()
-    elif (dealer_sum >= 17 and dealer_sum < 21):
-        compare_cards()
-        
-# When you need to check and assess the player's score
-def player_assess():
-    if player_sum < 21:
-        new_card = input("Hit ('y') or Stand ('n'): ")
-    elif player_sum == 21:
-        player_wins()
-    elif player_sum > 21:
-        dealer_wins()
-        dealer_assess()
-
-# In the case where you need to compare the scores of the dealer and the player, as to what is closest to 21
-def compare_cards():
-    cards = {
-        "player": player_sum,
-        "dealer": dealer_sum
-    }
-
-    for key in cards:
-        winner = max(cards[key])
-        
-################################################################
-
-# Functions that only function
-# Functions with outputs
-# Functions with inputs
-
-
-        
-    
-
-# if what_of_player() == True:
-#         choice = int(input("What number would you like two 11's to represent, a soft 12, or a 2: "))
-#         player_sum = choice
-
-
-
-
-
-
-
-
-
+# choice = int(input("What number would you like two 11's to represent, a soft 12, or a 2: "))
 
