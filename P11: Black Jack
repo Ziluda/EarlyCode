@@ -23,14 +23,18 @@ if choice == 'y':
     print(logo)
     player_cards = [random.choice(deck), random.choice(deck)]
     player_sum = sum(player_cards)
+
+    if player_sum > 21:
+        player_cards.remove(11)
+        player_cards.append(1)
     
     dealer_cards = [random.choice(deck)]
     dealer_sum = sum(dealer_cards)
     
     ################################################################
 
-    # nothing in it = NII
-    # in it = II
+    # (no recursion) nothing in it = NII
+    # (recursion) in it = II
     
     #1 When player wins, NII
     def player_wins():
@@ -38,9 +42,15 @@ if choice == 'y':
         global player_sum
         global dealer_cards
         global dealer_sum
-        print(f"Your Final Cards: {player_cards}, Your Final Score: {player_sum}")
-        print(f"Dealer's Final Cards: {dealer_cards}, Dealer's Final Score: {dealer_sum}")
-        print("YOU WIN!!!")
+        if (len(player_cards) == 2) and (player_sum == 21):
+            print(f"Your Final Cards: {player_cards}, Your Final Score: {player_sum}")
+            print(f"Dealer's Final Cards: {dealer_cards}, Dealer's Final Score: {dealer_sum}")
+            print("BLACKJACK!!! YOU WIN!!!")
+            
+        else:
+            print(f"Your Final Cards: {player_cards}, Your Final Score: {player_sum}")
+            print(f"Dealer's Final Cards: {dealer_cards}, Dealer's Final Score: {dealer_sum}")
+            print("YOU WIN!!!")
 
     #2 When dealer wins or player loses, II
     def dealer_wins():
@@ -48,9 +58,15 @@ if choice == 'y':
         global player_sum
         global dealer_cards
         global dealer_sum
-        print(f"Your Final Cards: {player_cards}, Your Final Score: {player_sum}")
-        print(f"Dealer's Final Cards: {dealer_cards}, Dealer's Final Score: {dealer_sum}")
-        print("YOU LOSE! Dealer wins.")
+        if (len(dealer_cards) == 2) and (dealer_sum == 21):
+            print(f"Your Final Cards: {player_cards}, Your Final Score: {player_sum}")
+            print(f"Dealer's Final Cards: {dealer_cards}, Dealer's Final Score: {dealer_sum}")
+            print("Dealer has a BLACKJACK!!! YOU LOSE!")
+
+        else:
+            print(f"Your Final Cards: {player_cards}, Your Final Score: {player_sum}")
+            print(f"Dealer's Final Cards: {dealer_cards}, Dealer's Final Score: {dealer_sum}")
+            print("YOU LOSE! Dealer wins.")
 
     #3 When it's a tie, NII
     def draw():
@@ -146,13 +162,10 @@ if choice == 'y':
     while not end:        
         dealer_sum = sum(dealer_cards)
         player_sum = sum(player_cards)
-        
+
         print(f"Your Cards: {player_cards}, Your Score: {player_sum}")
         print(f"Dealer's Cards: {dealer_cards}, Dealer's Score: {dealer_sum}")
 
         player_assess()
-
-
-# choice = int(input("What number would you like two 11's to represent, a soft 12, or a 2: "))
 
 
