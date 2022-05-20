@@ -120,9 +120,6 @@ if choice == 'y':
         elif x == 'n':
             dealer_add()
             dealer_assess()
-                # global dealer_cards
-                # global dealer_sum
-                # dealer_sum = sum(dealer_cards)
 
     #8 In the case where you need to compare the scores of the dealer and the player, as to what is closest to 21, II
     def compare_cards():
