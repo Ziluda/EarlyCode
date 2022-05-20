@@ -1,5 +1,3 @@
-# UNFINISHED (just have to add dual ace functionality)
-
 import random
 
 logo = """
@@ -28,9 +26,13 @@ if choice == 'y':
         player_cards.remove(11)
         player_cards.append(1)
     
-    dealer_cards = [random.choice(deck)]
+    dealer_cards = [random.choice(deck), random.choice(deck)]
     dealer_sum = sum(dealer_cards)
-    
+
+    print(dealer_cards)
+
+    first_time = False
+    yes = False
     ################################################################
 
     # (no recursion) nothing in it = NII
@@ -59,15 +61,13 @@ if choice == 'y':
         global dealer_cards
         global dealer_sum
         if (len(dealer_cards) == 2) and (dealer_sum == 21):
-            print(f"Your Final Cards: {player_cards}, Your Final Score: {player_sum}")
-            print(f"Dealer's Final Cards: {dealer_cards}, Dealer's Final Score: {dealer_sum}")
             print("Dealer has a BLACKJACK!!! YOU LOSE!")
 
         else:
             print(f"Your Final Cards: {player_cards}, Your Final Score: {player_sum}")
             print(f"Dealer's Final Cards: {dealer_cards}, Dealer's Final Score: {dealer_sum}")
             print("YOU LOSE! Dealer wins.")
-
+            
     #3 When it's a tie, NII
     def draw():
         global player_cards
@@ -97,6 +97,8 @@ if choice == 'y':
         global end
         if dealer_sum < 17:
             dealer_add()
+            global yes
+            yes = True
         elif dealer_sum == 21:
             dealer_wins()
             end = True
@@ -119,6 +121,8 @@ if choice == 'y':
             player_add()
         elif x == 'n':
             dealer_add()
+            global yes
+            yes = True
             dealer_assess()
 
     #8 In the case where you need to compare the scores of the dealer and the player, as to what is closest to 21, II
@@ -159,10 +163,20 @@ if choice == 'y':
     while not end:        
         dealer_sum = sum(dealer_cards)
         player_sum = sum(player_cards)
-
+        
         print(f"Your Cards: {player_cards}, Your Score: {player_sum}")
-        print(f"Dealer's Cards: {dealer_cards}, Dealer's Score: {dealer_sum}")
+
+        if (len(dealer_cards) == 2) and (dealer_sum == 21):
+            print(f"Dealer's Cards: {dealer_cards}, Dealer's Score: {dealer_sum}")
+            dealer_wins()
+            break
+            
+        if yes:
+            print(f"Dealer's Cards: {dealer_cards}, Dealer's Score: {dealer_sum}")
+
+        else:
+            fdealer_cards = [dealer_cards[0]]
+            fdealer_sum = dealer_cards[0]
+            print(f"Dealer's Cards: {fdealer_cards}, Dealer's Score: {fdealer_sum}")
 
         player_assess()
-
-
