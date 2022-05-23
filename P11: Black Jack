@@ -20,6 +20,7 @@ if choice == 'y':
 
     print(logo)
     player_cards = [random.choice(deck), random.choice(deck)]
+    #player_cards = [11, 10]
     player_sum = sum(player_cards)
 
     if player_sum > 21:
@@ -32,7 +33,7 @@ if choice == 'y':
     print(dealer_cards)
 
     first_time = False
-    yes = False
+    yes = False # this is to show only 
     ################################################################
 
     # (no recursion) nothing in it = NII
@@ -48,7 +49,6 @@ if choice == 'y':
             print(f"Your Final Cards: {player_cards}, Your Final Score: {player_sum}")
             print(f"Dealer's Final Cards: {dealer_cards}, Dealer's Final Score: {dealer_sum}")
             print("BLACKJACK!!! YOU WIN!!!")
-            
         else:
             print(f"Your Final Cards: {player_cards}, Your Final Score: {player_sum}")
             print(f"Dealer's Final Cards: {dealer_cards}, Dealer's Final Score: {dealer_sum}")
@@ -100,7 +100,10 @@ if choice == 'y':
             global yes
             yes = True
         elif dealer_sum == 21:
-            dealer_wins()
+            if player_sum == 21:
+                draw()
+            else:
+                dealer_wins()
             end = True
         elif dealer_sum > 21:
             player_wins()
@@ -109,10 +112,9 @@ if choice == 'y':
             deter = compare_cards()
             if deter == "player":
                 player_wins()
-                end = True
             elif deter == "dealer":
                 dealer_wins()
-                end = True
+            end = True
 
     #7 When you want the player to choose either hit 'y' or stand 'n', II
     def ask_to_add():
@@ -155,8 +157,10 @@ if choice == 'y':
         elif player_sum < 21:
             ask_to_add()
         elif player_sum == 21:
-            dealer_assess()
-            player_wins()
+            if len(player_cards) == 2:
+                player_wins()
+            else:
+                dealer_assess()
             end = True
             
 ################################################################
