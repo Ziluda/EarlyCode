@@ -69,7 +69,7 @@ def compare(player_score, dealer_score):
         return "\nYou went over, you lose!"
     elif dealer_score > 21:
         return "\nThe dealer went over, you win!"
-    elif player_score > dealer_score:
+    elif player_score > dealer_score: # learning moment: you thought to declare a new variable 'winner' and use the max() function
         return "\nYou WIN!!!"
     else:
         return "\nYou LOSE!!!"
@@ -122,6 +122,8 @@ def play_game():
         
         print(f"\n    Your cards: {player_cards} Your score: {player_score}")
         print(f"\n    Dealer's first card: {dealer_cards[0]}")
+        
+        # the following if-statement catches a BlackJack or player over before we use the function compare(ps, ds)
         
         if dealer_score == 0 or player_score == 0 or player_score > 21:
             game_over = True
