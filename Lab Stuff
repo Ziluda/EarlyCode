@@ -1,0 +1,169 @@
+# def q1_sign(num):
+#     if num > 0:
+#         print("Positive")
+#     elif num == 0:
+#         print("Zero")
+#     elif num < 0:
+#         print("Negative")
+
+# def q2_float(float_num):
+#     if num == 0:
+#         print("Zero")
+#     elif num > 0:
+#         if num < 1:
+#             print("Small Positive")
+#         elif num > 1000:
+#             print("Large Positive")
+#         else:
+#             print("Positive")
+#     elif num < 0:
+#         if num < 1:
+#             print("Small Negative")
+#         elif num > 1000:
+#             print("Large Negative")
+#         else:
+#             print("Negative")
+
+# def q3():
+#     num = int(input("Enter a number: "))
+    
+#     if num < 0:
+#         num *= -1
+
+#     if num >= 10**6:
+#         print("Lots")
+#     elif num >= 10**5:
+#         print("This number has six digits")
+#     elif num >= 10**4:
+#         print("This number has five digits")
+#     elif num >= 10**3:
+#         print("This number has four digits")
+#     elif num >= 10**2:
+#         print("This number has three digits")
+#     elif num >= 10:
+#         print("This number has two digits")
+#     elif num >= 0 and num < 10:
+#         print("This number has one digit")
+
+# def q4():
+#     a = int(input("Enter the first number: "))
+#     b = int(input("Enter the second number: "))
+#     c = int(input("Enter the third number: "))
+
+#     if a == b and b == c:
+#         print("All the same.")
+#     elif a != b and b != c:
+#         print("All different.")
+#     else:
+#         print("Otherwise.")
+
+# def q5():
+#     a = int(input("Enter the first number: "))
+#     b = int(input("Enter the second number: "))
+#     c = int(input("Enter the third number: "))
+
+#     if a < b and b < c:
+#         print("Increasing")
+#     elif a > b and b > c:
+#         print("Decreasing")
+#     else:
+#         print("Neither")
+
+# def q6():
+#     a = int(input("Enter the first number: "))
+#     b = int(input("Enter the second number: "))
+#     c = int(input("Enter the third number: "))
+
+#     mode = input("strict or lenient (w.r.t Increasing/Decreasing)? ")
+
+#     if mode == "strict":
+#         if a < b and b < c:
+#             print("Increasing")
+#         elif a > b and b > c:
+#             print("Decreasing")
+#         else:
+#             print("Neither")
+#     else:
+#         if a <= b and b <= c:
+#             print("Increasing")
+#         elif a >= b and b >= c:
+#             print("Decreasing")
+#         elif a == b and b == c:
+#             print("Increasing and Decreasing")
+#         else:
+#             print("Neither")
+
+# def q7():
+#     a = int(input("Enter the first number: "))
+#     b = int(input("Enter the second number: "))
+#     c = int(input("Enter the third number: "))
+
+#     if a <= b and b <= c:
+#         print("Ascending")
+#     elif a >= b and b >= c:
+#         print("Descending")
+#     else:
+#         print("Not in order")
+
+def q8():
+    a = int(input("Enter the first number: "))
+    b = int(input("Enter the second number: "))
+    c = int(input("Enter the third number: "))
+    d = int(input("Enter the fourth number: "))
+
+    if a == b or b == c or c == d or d == a or c == a:
+        
+
+def q9():
+    temp_unit = input("What is the temperature unit: ")
+    temp_num = int(input("Enter a numeric temperature value: "))
+
+    if temp_unit == "C":
+        if temp <= 0:
+            print("It's a solid.")
+        elif 0 < temp and temp < 100:
+            print("It's a liquid.")
+        elif temp >= 100:
+            print("It's a gas.")
+        else:
+            print("Enter")
+            
+            elif :
+        if temp <= 32:
+            print("It's a solid.")
+        elif 32 < temp and temp < 212:
+            print("It's a liquid.")
+        elif temp >= 212:
+            print("It's a gas.")
+        
+    
+
+
+# if __name__ == "__main__":
+#     og_list = [0, 1, 1, 3, 2, 4, 4, 4, 5]
+
+# def smart():
+#     magician = int(input("Pick a magic number: "))
+    
+#     new_list = []
+#     counter = 0 # instead of making a new list to count what index you're talking about
+
+#     for n in og_list: # so n is actually the element in the list
+#         # if the index position is the element but the magician is also the element, add the element to new_list and increment the counter
+#         if n == magician:
+#             new_list.append(n)
+#             counter += 1
+
+#         # if the index position is not the element, add the element to new_list and increment the counter
+#         elif n != counter:
+#             new_list.append(n)
+#             counter += 1
+            
+#         # if the index position (aka counter) is the element, pass
+#         elif n == counter:
+#             pass
+
+#         # print the new list
+#         print(new_list)
+
+#     print("Final:", new_list)
