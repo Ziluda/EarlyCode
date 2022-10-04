@@ -1,0 +1,119 @@
+def question_1():
+    sum = 0
+    for v in range(2,101):
+        sum += v
+    print(sum)
+
+def question_2():
+    sum = 0
+    for v in range(1,101):
+        sum += v**2
+    print(sum)
+
+def question_3():
+    sum = 0
+    for v in range(0, 21):
+        powers = 2**v
+        print(powers)
+
+def question_4(): 
+    a = int(input("Enter the first number: "))
+    b = int(input("Enter the second number: "))
+
+    odd_list = []
+    odd_sum = 0
+
+    if a%2 == 0:
+        a += 1
+
+    if b%2 == 0: # ask question here
+        b += 1
+
+    for v in range(a, b, 2):
+        odd_list.append(v)
+    
+    for v in odd_list:
+        odd_sum += v
+
+    print(odd_list)
+    print(odd_sum)
+
+def question_5():
+    a = input("Enter a number: ")
+
+    odd_list = []
+    odd_sum = 0
+    
+    for v in a:
+        int_v = int(v)
+        if int_v%2!=0:
+            odd_list.append(int_v)
+
+    for v in odd_list:
+        odd_sum += v
+
+    print(odd_sum)
+
+def question_6():
+    input_list = []
+    odd_list = []
+    
+    while len(input_list) < 10:
+        a = int(input("Enter a number: "))
+        input_list.append(a)
+    for v in input_list:
+        if v%2!=0:
+            odd_list.append(v)
+
+    print(input_list)
+    print(odd_list)
+    print(max(odd_list))
+
+def question_7():
+    a = input("Enter a string sequence with any data type: ")
+
+    str_nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    num_list = []
+    
+    for v in a:
+        if v in str_nums:
+            v = int(v)
+            num_list.append(v)
+
+    sum = 0
+    
+    for n in num_list:
+        sum += n
+
+    print(num_list)
+    print(sum)
+
+
+def question_8():
+    num = input("Enter a string of float values separated by commas (careful, no spaces: ")
+
+    list = num.split(",")
+    flist = []
+    
+    for v in list:
+        f = float(v)
+        flist.append(f)
+
+    deci_sum = 0
+
+    for v in flist:
+        deci_sum += v
+
+    print(list)
+    print(deci_sum)
+    
+
+if __name__ == "__main__":
+    #question_1()
+    #question_2()
+    #question_3()
+    #question_4()
+    #question_5()
+    #question_6()
+    #question_7()
+    #question_8()
