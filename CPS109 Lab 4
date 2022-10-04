@@ -11,7 +11,6 @@ def question_2():
     print(sum)
 
 def question_3():
-    sum = 0
     for v in range(0, 21):
         powers = 2**v
         print(powers)
